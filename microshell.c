@@ -51,7 +51,7 @@ int exec(char **argv, int i, char **envp)
 int main(int argc, char **argv, char **envp)
 {
     (void)argc;
-    int    i = 0, status = 0;
+    int    i, status = 0;
     while (argv[i])
     {
     	argv += i + 1;
