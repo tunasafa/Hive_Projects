@@ -1,73 +1,36 @@
-# Minishell
-```
-Run with:
-make
-```
-## Description
-This is a custom shell implementation written in C, designed to mimic the basic functionalities of a Unix-like shell. It provides a prompt for users to enter commands and executes them accordingly. The shell supports various features including history, redirections, pipes, environment variables, signal handling, and built-in commands.
+# Minishell: A Custom Shell Implementation
+
+## Project Overview
+
+This project is a custom implementation of a command-line shell in C. It's a comprehensive project that covers a wide range of systems programming concepts, from parsing and executing commands to managing processes and handling signals. The goal is to create a shell that can interpret and execute a subset of the commands and features found in a standard shell like bash.
+
+## How to Compile and Run
+
+1. **Compile:** The project includes a `Makefile`. Run the `make` command to build the `minishell` executable.
+2. **Run:** Execute the compiled binary:
+   ```bash
+   ./minishell
+   ```
+   This will start the shell and display the `Minishell:$` prompt.
 
 ## Features
-Prompt: Displays a prompt for users to input commands.
 
-History: Maintains a working history of previously executed commands.
+- **Command History:** The shell uses the `readline` library to provide command history.
+- **Built-in Commands:** The shell implements the following built-in commands: `echo`, `cd`, `pwd`, `export`, `unset`, `env`, and `exit`.
+- **Pipes:** The shell supports the use of pipes (`|`) to chain commands together.
+- **I/O Redirection:** The shell supports input and output redirection (`<`, `>`, `<<`, `>>`).
+- **Environment Variable Expansion:** The shell can expand environment variables (e.g., `$USER`).
+- **Signal Handling:** The shell handles signals such as `Ctrl-C`, `Ctrl-D`, and `Ctrl-\`.
 
-Executable Launch: Searches and launches the correct executable based on the PATH variable or using relative/absolute paths.
+## Technical Concepts Learned
 
-Signal Handling: Utilizes a single global variable to indicate a received signal, ensuring signal handlers do not access main data structures.
+This project provides a practical understanding of several advanced C and systems programming concepts:
 
-Quoting: Handles single and double quotes to prevent interpretation of metacharacters.
-
-## Redirections:
-
-**```<: Redirects input.```**
-
-**```>: Redirects output.```**
-
-**```<<: Reads input until a specified delimiter is seen.```**
-
-**```>>: Redirects output in append mode.```**
-
-**Pipes (|)**: Connects the output of one command to the input of the next command via a pipe.
-**Environment Variables**: Handles expansion of environment variables ($ followed by a sequence of characters) to their values.
-**Exit Status ($?)**: Expands to the exit status of the most recently executed foreground pipeline.
-
-## Signal Handling:
-
-**```ctrl-C: Displays a new prompt on a new line in interactive mode.```**
-
-**```ctrl-D: Exits the shell.```**
-
-**```ctrl-\: No action.```**
-
-## Built-in Commands:
-**```echo: Supports option -n.```**
-
-**```cd: Supports only relative or absolute paths.```**
-
-**```pwd: No options.```**
-
-**```export: No options.```**
-
-**```unset: No options.```**
-
-**```env: No options or arguments.```**
-
-**```exit: No options.```**
-
-## Usage:
-
-**Compile**: Compile the shell program using a C compiler (e.g., gcc).
-
-**Run**: Execute the compiled program to start the custom shell.
-
-**Enter Commands**: Use the prompt to input commands. Execute built-in commands or external executables with appropriate options.
-
-**Exit**: To exit the shell, use the exit command or press ctrl-D.
-
-## Limitations
-**Memory Leaks**: The readline() function may cause memory leaks, but efforts have been made to ensure the custom code does not contain memory leaks.
-
-## Notes
-This shell implementation adheres to the specified requirements and aims to provide a basic interactive shell experience similar to Unix-like shells.
-Additional features or enhancements can be implemented based on specific requirements or preferences.
-haha
+- **Parsing:** The shell parses the user's input into a command table, which is a structured representation of the commands to be executed. This involves lexical analysis and parsing.
+- **Process Management:** The shell uses the `fork`, `execve`, and `waitpid` system calls to create and manage child processes for executing external commands.
+- **File Descriptors and I/O Redirection:** The project requires a deep understanding of file descriptors to implement I/O redirection. The `dup2` system call is used to redirect the standard input, output, and error streams.
+- **Pipes:** The shell uses the `pipe` system call to create pipes for inter-process communication between chained commands.
+- **Signal Handling:** The project uses the `signal` and `sigaction` system calls to handle signals. This is crucial for making the shell robust and interactive.
+- **Environment Variables:** The shell interacts with the environment variables of the operating system.
+- **Built-in Commands:** The project demonstrates how to implement built-in commands, which are commands that are executed directly by the shell process itself, rather than in a child process.
+- **Readline Library:** The `readline` library is used to provide a more user-friendly command-line interface with features like history and line editing.
